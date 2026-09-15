@@ -1,0 +1,15 @@
+{
+  "name": "Model Router",
+  "description": "专业的通用技能，支持等功能。",
+  "version": "1.0.0",
+  "category": "通用",
+  "triggers": [],
+  "capabilities": {
+    "audit": {
+      "checks": []
+    },
+    "repair": {
+      "features": []
+    }
+  }
+}

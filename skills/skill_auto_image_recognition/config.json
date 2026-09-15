@@ -1,0 +1,18 @@
+{
+  "name": "Auto Image Recognition",
+  "description": "- 收到图片时自动触发识别\n- 调用 MiMo-V2-Omni 进行图文识别\n- 识别完成后向用户汇报内容",
+  "version": "2.0.0",
+  "category": "AI能力",
+  "triggers": [
+    "图像",
+    "image"
+  ],
+  "capabilities": {
+    "audit": {
+      "checks": []
+    },
+    "repair": {
+      "features": []
+    }
+  }
+}

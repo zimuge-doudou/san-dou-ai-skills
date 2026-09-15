@@ -1,0 +1,45 @@
+{
+  "name": "skill_model_router",
+  "version": "3.0",
+  "description": "模型无关的智能调度系统 v3。不管主模型是谁（mimo/qwen/kimi/其他），都严格遵循本文件的规则执行。",
+  "author": "豆豆",
+  "tags": ["scheduler", "router", "model-routing", "agnostic", "foolproof"],
+  "permissions": {
+    "file_system": {
+      "read": ["~/.openclaw/workspace/skills/skill_model_router/SKILL.md"],
+      "write": []
+    },
+    "network": {
+      "outbound": [],
+      "inbound": []
+    },
+    "system": {
+      "execute": false,
+      "subagent_spawn": true
+    }
+  },
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "user_message": {"type": "string"},
+      "keywords": {"type": "array"}
+    },
+    "required": ["user_message"]
+  },
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "routed_to": {"type": "string"},
+      "task_type": {"type": "string"},
+      "execution_result": {"type": "string"}
+    },
+    "required": ["routed_to", "task_type"]
+  },
+  "dependencies": {
+    "subagents": ["bailian/qwen3-coder-plus", "bailian/glm-5"],
+    "skills": ["skill_code_review", "skill_security_audit", "skill_complex_reasoning"]
+  },
+  "entry_point": "skill_model_router",
+  "created_at": "2026-04-01T00:59:00Z",
+  "updated_at": "2026-04-01T00:59:00Z"
+}

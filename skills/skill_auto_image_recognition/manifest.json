@@ -1,0 +1,47 @@
+{
+  "name": "skill_auto_image_recognition",
+  "version": "2.0",
+  "description": "MiMo-V2-Omni图片识别技能，使用小米MiMo全模态模型进行图片内容分析。",
+  "author": "豆豆",
+  "tags": ["image", "recognition", "mimo", "xiaomi", "omni"],
+  "permissions": {
+    "file_system": {
+      "read": ["*.jpg", "*.jpeg", "*.png", "*.gif", "*.webp", "*.bmp"],
+      "write": []
+    },
+    "network": {
+      "outbound": ["token-plan-cn.xiaomimimo.com:443"],
+      "inbound": []
+    },
+    "system": {
+      "execute": false,
+      "api_calls": true
+    }
+  },
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "image_path": {"type": "string"},
+      "prompt": {"type": "string"}
+    },
+    "required": ["image_path"]
+  },
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "success": {"type": "boolean"},
+      "content": {"type": "string"},
+      "model": {"type": "string"},
+      "elapsed_ms": {"type": "integer"},
+      "usage": {"type": "object"}
+    },
+    "required": ["success"]
+  },
+  "dependencies": {
+    "apis": ["MiMo OpenAI-compatible API"],
+    "models": ["mimo-v2.5"]
+  },
+  "entry_point": "mimo_image_recognize.py",
+  "created_at": "2026-04-01T00:59:00Z",
+  "updated_at": "2026-04-03T20:22:00Z"
+}
