@@ -38,11 +38,16 @@ def route_recognition(image_path: str, prompt: str = "") -> dict:
         return {"error": f"识图脚本不存在: {script}"}
     
     prompt_arg = prompt or "请详细识别这张图片中的所有内容，用中文回复。"
-    cmd = f"python3 {script} '{image_path}' '{prompt_arg}'"
-    
+
+    # 🔒 安全修复（2026-09-16）：原先用 f-string 把参数拼进 shell 字符串并以
+    # shell=True 执行，单引号未转义 → 参数中的 ' 可闭合引号注入任意命令
+    # （已实测复现，见 AREAS/运维手册/安全审计实证_..._20260916.md）。
+    # 改为参数列表 + shell=False：参数不再经过 shell 解析，注入面消除。
+    argv = ["python3", script, image_path, prompt_arg]
+
     try:
         result = subprocess.run(
-            cmd, shell=True, capture_output=True, text=True, timeout=90
+            argv, shell=False, capture_output=True, text=True, timeout=90
         )
         if result.returncode == 0:
             return {"success": True, "content": result.stdout.strip(), "method": "qwen3-vl:235b"}
